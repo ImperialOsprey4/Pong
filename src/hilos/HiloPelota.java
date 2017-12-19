@@ -48,12 +48,10 @@ public class HiloPelota extends Thread{
 				}
 
                 if (colision(Jugador1, pelota)) {
-                    System.out.println("COLISION Jugador1");
                     direccion_X = 1;
                 }
 
                 if (colision(Jugador2, pelota)) {
-                    System.out.println("COLISION Jugador2");
                    direccion_X = -1;
                 }
 				

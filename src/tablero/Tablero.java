@@ -27,6 +27,7 @@ public class Tablero {
         inicio();
         jFramePrincipal.setVisible(true);
         jFramePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFramePrincipal.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../recursos/icon.png")));
     }
 
     private void inicio() {
@@ -38,7 +39,7 @@ public class Tablero {
 
         jPanelPrincipal = new JPanel();
         jPanelPrincipal.setSize(700, 500);
-        jPanelPrincipal.setBackground(new Color(13, 64, 56));
+        jPanelPrincipal.setBackground(Color.black);
         jPanelPrincipal.setLayout(null);
         jFramePrincipal.add(jPanelPrincipal);
 
