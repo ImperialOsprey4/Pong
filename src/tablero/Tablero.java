@@ -1,6 +1,6 @@
 package tablero;
 
-import calses.Partida;
+import clases.Partida;
 
 import java.awt.*;
 
@@ -80,10 +80,6 @@ public class Tablero {
 
         PartidaPong = new Partida(jFramePrincipal,jlPaletaJugador1,jlPaletaJugador2,jlPelota,5);
         PartidaPong.comenzarPartida();
-
-
-
-
 
     }
 }
