@@ -11,16 +11,17 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class Tablero {
-    JFrame jFramePrincipal = null;
-    JPanel jPanelPrincipal = null;
-    JLabel jlPaletaJugador1 = null;
-    JLabel jlPaletaJugador2 = null;
-    JLabel jlMarcador1 = null;
-    JLabel jlMarcador2 = null;
-    JLabel jlPelota = null;
+    public JFrame jFramePrincipal = null;
+    public JPanel jPanelPrincipal = null;
+    public JLabel jlPaletaJugador1 = null;
+    public JLabel jlPaletaJugador2 = null;
+
+     public JLabel jlMarcador1 = null;
+     public JLabel jlMarcador2 = null;
+
+    public JLabel jlPelota = null;
     JLabel jlLinea = null;
 
-    Partida PartidaPong;
 
 
     public Tablero() {
@@ -31,7 +32,7 @@ public class Tablero {
     }
 
     private void inicio() {
-        jFramePrincipal = new JFrame("Ping - Pong");
+        jFramePrincipal = new JFrame("Pong - David Zambrano Agudo");
         jFramePrincipal.setResizable(false);
         jFramePrincipal.setLayout(null);
         jFramePrincipal.setSize(700, 500);
@@ -70,17 +71,16 @@ public class Tablero {
 
         jlMarcador1 = new JLabel("0");
         jlMarcador1.setForeground(Color.white);
-        jlMarcador1.setBounds(320,10,10,10);
+        jlMarcador1.setFont(new Font("Serif",  Font.BOLD, 25));
+        jlMarcador1.setBounds(315,10,25,25);
         jPanelPrincipal.add(jlMarcador1);
 
 
         jlMarcador2 = new JLabel("0");
         jlMarcador2.setForeground(Color.white);
-        jlMarcador2.setBounds(358,10,10,10);
+        jlMarcador2.setFont(new Font("Serif",  Font.BOLD, 25));
+        jlMarcador2.setBounds(358,10,25,25);
         jPanelPrincipal.add(jlMarcador2);
-
-        PartidaPong = new Partida(jFramePrincipal,jlPaletaJugador1,jlPaletaJugador2,jlPelota,5);
-        PartidaPong.comenzarPartida();
 
     }
 }

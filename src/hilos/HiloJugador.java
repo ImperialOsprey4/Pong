@@ -21,10 +21,20 @@ public class HiloJugador extends Thread
 	public void run(){
 	    if(currentThread().getName().equals("Jugador1")){
 	        jugador1();
-           }else
-                jugador2();
+            try {
+                sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }else
+            jugador2();
+            try {
+                sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-        }
+    }
 
 	public void jugador1()
 	{

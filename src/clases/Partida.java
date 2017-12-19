@@ -2,42 +2,94 @@ package clases;
 
 import hilos.HiloJugador;
 import hilos.HiloPelota;
+import tablero.Tablero;
 
 import javax.swing.*;
 
 public class Partida {
-    JFrame FramePrincipal = null;
-    JLabel Jugador1 = null;
-    JLabel Jugador2 = null;
-    JLabel Pelota = null;
-    int velocidad;
+    Tablero tablero = null;
+    int velocidad = 2;
 
-    HiloJugador MovientoJugador1;
-    HiloJugador MovientoJugador2;
-    HiloPelota MovimeintoPelota;
+    HiloJugador MovimientoJugador1;
+    HiloJugador MovimientoJugador2;
+   public  HiloPelota MovimientoPelota;
 
-    public Partida(JFrame FramePrincipal,JLabel Jugador1, JLabel Jugador2, JLabel Pelota, int velocidad){
-        this.FramePrincipal = FramePrincipal;
-        this.Jugador1 = Jugador1;
-        this.Jugador2 = Jugador2;
-        this.Pelota = Pelota;
-        this.velocidad = velocidad;
+    int Marcador_jugador1 = 0;
+    int Marcador_jugador2 = 0;
+
+    public Partida(){
+        inicio();
+        comenzarPartida();
+    }
+
+    private void comenzarPartida() {
+
+        /*Mientras la pelota este en movimiento se van contando los puntos hasta 5*/
+        while (MovimientoPelota.isAlive()){
+            if (MovimientoPelota.colisionizquierda()) {
+                puntoJugador2();
+            }
+
+            if (MovimientoPelota.colisionDerecha()) {
+                puntoJugador1();
+            }
+
+            if(Marcador_jugador1 == 5 ||Marcador_jugador2 == 5){
+                MovimientoPelota.stop();
+                JOptionPane.showMessageDialog(null,"Ha ganado el "+ganador(),
+                        "Fin de la partida", JOptionPane.INFORMATION_MESSAGE,null);
+                System.exit(0);
+            }
+
+        }
 
     }
 
-    public void comenzarPartida() {
-        MovientoJugador1 = new HiloJugador(FramePrincipal, Jugador1);
-        MovientoJugador1.setName("Jugador1");
-        MovientoJugador1.start();
-
-        MovientoJugador2 = new HiloJugador(FramePrincipal, Jugador2);
-        MovientoJugador2.setName("Jugador2");
-        MovientoJugador2.start();
-
-        MovimeintoPelota = new HiloPelota(FramePrincipal, Jugador1, Jugador2, Pelota, velocidad);
-        MovimeintoPelota.setName("Pelota");
-        MovimeintoPelota.start();
+    private void reiniciarMarcadores() {
+        Marcador_jugador1 = 0;
+        Marcador_jugador2 = 0;
+        tablero.jlMarcador1.setText("0");
+        tablero.jlMarcador2.setText("0");
     }
+
+    public void inicio() {
+        /*Se inician los hilos*/
+        tablero = new Tablero();
+
+        MovimientoJugador1 = new HiloJugador(tablero.jFramePrincipal, tablero.jlPaletaJugador1);
+        MovimientoJugador1.setName("Jugador1");
+        MovimientoJugador1.start();
+
+        MovimientoJugador2 = new HiloJugador(tablero.jFramePrincipal, tablero.jlPaletaJugador2);
+        MovimientoJugador2.setName("Jugador2");
+        MovimientoJugador2.start();
+
+        MovimientoPelota = new HiloPelota(tablero,tablero.jFramePrincipal, tablero.jlPaletaJugador1,  tablero.jlPaletaJugador2, tablero.jlPelota, velocidad);
+        MovimientoPelota.setName("Pelota");
+        MovimientoPelota.start();
+    }
+
+    private void puntoJugador2() {
+        /*Se aumenta un punto el Jugador2*/
+        Marcador_jugador2++;
+        tablero.jlMarcador2.setText(String.valueOf(Marcador_jugador2));
+    }
+
+    private void puntoJugador1() {
+         /*Se aumenta un punto el Jugador2*/
+        Marcador_jugador1++;
+        tablero.jlMarcador1.setText(String.valueOf(Marcador_jugador1));
+    }
+
+
+    private String ganador(){
+        /*Devuelve el ganador*/
+        if(Marcador_jugador1 == 5)
+            return "Jugador 1";
+        else
+            return "Jugador 2";
+    }
+
 
 
 }
